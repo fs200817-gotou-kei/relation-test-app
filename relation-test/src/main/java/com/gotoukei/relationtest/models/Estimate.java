@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -19,11 +21,13 @@ public class Estimate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "product_cd")
-    private int productCd;
+    @ManyToOne
+    @JoinColumn(name = "product_cd")
+    private Product product;
 
-    @Column(name = "price")
-    private int price;
+    @ManyToOne
+    @JoinColumn(name = "employee_cd")
+    private Employee employee;
 
     @Column(name = "quantity")
     private int quantity;
