@@ -3,8 +3,10 @@ package com.gotoukei.relationtest.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,10 +22,13 @@ public class RelationController {
     private EstimateService estimateService;
 
     @GetMapping("")
-    public List<Estimate> getAllEstimates() {
-        System.out.println("OK");
-        List<Estimate> estimates = this.estimateService.getAllEstimates();
-        System.out.println(estimates.toString());
-        return estimates;
+    public ResponseEntity<List<Estimate>> getAllEstimates() {
+        System.out.println("RelationControllerの見積全取得処理を開始");
+        return this.estimateService.getAllEstimates();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Estimate> getEstimateById(@PathVariable int id) {
+        return this.estimateService.getEstimateById(id);
     }
 }
